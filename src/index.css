@@ -12,4 +12,15 @@
     background-image: url("../src/assets/images/bg-sidebar-desktop.svg");
     background-repeat: no-repeat;
     background-position: bottom;
+    /* background-size: contain; */
 }
+.active {
+    @apply bg-blue-300
+}
+/* .bg-mobile {
+    background-image: url("../src/assets/images/bg-sidebar-mobile.svg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    height: 160px;
+} */
