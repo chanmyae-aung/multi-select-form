@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.title {
+    @apply text-3xl font-bold 
+}
+.sub-title {
+    @apply text-sm font-semibold text-white
+}
+.bg-img {
+    background-image: url("../src/assets/images/bg-sidebar-desktop.svg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
