@@ -24,13 +24,13 @@ export default function FooterButton() {
         </button>
       )}
       <Button
-        onclick={() => {
-          if (home) {
-            nav("/plan");
-          } else if (plan) {
-            nav("/add-ons");
-          } else nav("/summary");
-        }}
+        // onclick={() => {
+        //   if (home) {
+        //     nav("/plan");
+        //   } else if (plan) {
+        //     nav("/add-ons");
+        //   } else nav("/summary");
+        // }}
         text={!confirm ? "Next Step" : "Confirm"}
       />
     </div>
