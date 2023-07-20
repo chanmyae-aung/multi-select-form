@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    plan: null
+    plan: null,
+    addOns: [],
+    finishPlan:[]
 }
 const planSlice = createSlice({
     name: 'planSlice',
@@ -9,9 +11,15 @@ const planSlice = createSlice({
     reducers: {
         addPlan: (state, {payload}) => {
             state.plan = payload.plan
-        }
+        },
+        addAddOns: (state, {payload}) => {
+            state.addOns = payload.addOns
+        },
+        // getFinish: (state) => {
+        //     state.getFinish
+        // }
     }
 })
 
-export const {addPlan} = planSlice.actions
+export const {addPlan, addAddOns} = planSlice.actions
 export default planSlice.reducer

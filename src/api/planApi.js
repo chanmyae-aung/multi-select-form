@@ -14,15 +14,25 @@ export const planApi = createApi({
       }),
       invalidatesTags: ["plan"],
     }),
-
-    getPlan: builder.query({
-      query: (plan) => ({
-        url: "/api/plan",
-        body: plan,
+    createAddOns: builder.mutation({
+      query: (addon) => ({
+        url: "/api/addon",
+        method: "POST",
+        body: {
+          "add_on_ids": addon,
+          "is_choosen": true
+        },
       }),
       invalidatesTags: ["plan"],
+    }),
+    getFinish: builder.query({
+      query: () => ({
+        url: "/api/finish",
+        method: "GET",
+      }),
+      providesTags: ["finish"],
     }),
   }),
 });
 
-export const { useCreatePlanMutation } = planApi;
+export const { useCreatePlanMutation, useCreateAddOnsMutation, useGetFinishQuery } = planApi;

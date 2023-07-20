@@ -22,11 +22,6 @@ export default function ConfirmCard({ text, price }) {
             <p>Online service</p>
             <p>+$1/month</p>
           </div>
-
-          <div className="flex justify-between items-center text-slate-400 text-sm">
-            <p>Online service</p>
-            <p>+$1/month</p>
-          </div>
         </div>
       </div>
       <div className="flex justify-between items-center my-4 mx-5">

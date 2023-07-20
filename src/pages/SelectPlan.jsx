@@ -10,10 +10,12 @@ import FooterButton from "../components/FooterButton";
 import { useCreatePlanMutation } from "../api/planApi";
 import { useDispatch } from "react-redux";
 import { addPlan } from "../feature/planSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function SelectPlan() {
   const [choosePlan] = useCreatePlanMutation();
   const dispatch = useDispatch()
+  const nav = useNavigate()
 
   const [state, setState] = useState(null);
   console.log(state);
@@ -22,7 +24,7 @@ export default function SelectPlan() {
     const planTitle = e.target.lastChild.children[0].innerText;
     const planPrice = e.target.lastChild.children[1].innerText;
     setState({
-      title: planTitle,
+      title: planTitle, 
       price: planPrice,
     });
   };
@@ -32,6 +34,7 @@ export default function SelectPlan() {
     const {data} = await choosePlan(state);
     console.log(data);
     dispatch(addPlan({plan: data}))
+    data.message === "success" && nav('/add-ons')
   };
   return (
     <div className=" mt-10 mx-auto w-[55%] flex flex-col justify-between">
@@ -51,7 +54,7 @@ export default function SelectPlan() {
           <span>Yearly</span>
         </div>
       </div>
-      <button onClick={ConfirmPlan} className="px-8 py-3 rounded bg-slate-800 text-white">
+      <button onClick={ConfirmPlan} className="px-8 py-3 w-fit ml-auto rounded bg-slate-800 text-white">
         Next
       </button>
     </div>
