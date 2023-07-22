@@ -20,7 +20,8 @@ export const planApi = createApi({
         method: "POST",
         body: {
           "add_on_ids": addon,
-          "is_choosen": true
+          "is_choosen": true,
+          "type": "month",
         },
       }),
       invalidatesTags: ["plan"],

@@ -57,18 +57,21 @@ export default function AddOns() {
       title: "Online Service",
       desc: "Access to multiplayer games",
       price: "+$1/mo",
+      value: 1
     },
     {
       id: 2,
       title: "Large Storage",
       desc: "Extra 1TB of cloud save",
       price: "+$2/mo",
+      value: 2
     },
     {
       id: 3,
       title: "Customizable Profile",
       desc: "Custom theme on your profile",
       price: "+$2/mo",
+      value: 3
     },
   ];
 

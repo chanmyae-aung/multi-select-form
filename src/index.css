@@ -24,3 +24,6 @@
     background-size: cover;
     height: 160px;
 } */
+.selected{
+    border: 2px solid darkblue;
+}

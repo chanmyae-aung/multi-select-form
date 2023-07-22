@@ -1,28 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
 import Button from "../components/Button";
 import FooterButton from "../components/FooterButton";
-import { useCreateUserMutation } from "../api/userApi";
+import { useCreateUserMutation, useGetUserQuery, useUpdateUserMutation } from "../api/userApi";
 import { useDispatch } from "react-redux";
-import { createUser } from "../feature/userSlice";
+import { createUser, updateUser } from "../feature/userSlice";
 import { useNavigate } from "react-router-dom";
+import { useGetFinishQuery } from "../api/planApi";
 
 export default function YourInfo() {
   const [create] = useCreateUserMutation();
+  const [update] = useUpdateUserMutation();
+  const {data:existedUserData} = useGetUserQuery()
+  console.log(existedUserData)
+
   const nav = useNavigate();
   const dispatch = useDispatch();
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [phone, setPhone] = useState();
+  const [name, setName] = useState(existedUserData?.data.name);
+  const [email, setEmail] = useState(existedUserData?.data.email);
+  const [phone, setPhone] = useState(existedUserData?.data.phone);
+  useEffect(() => {
+    setName(existedUserData?.data.name)
+    setEmail(existedUserData?.data.email)
+    setPhone(existedUserData?.data.phone)
+  },[])
+  console.log(name)
 
   const createHandler = async (e) => {
     try {
       e.preventDefault();
       const user = { name, email, phone };
-      const { data } = await create(user);
+      if(existedUserData) {
+        const { data } = await update(user);
+      data.message === 'success' && nav("/plan")
+      console.log(data.message);
+      dispatch(updateUser({ user: data.user }));
+      } else {
+        const { data } = await create(user);
       data.message === 'success' && nav("/plan")
       console.log(data.message);
       dispatch(createUser({ user: data.user }));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,6 +59,7 @@ export default function YourInfo() {
             </span>
             <input
               onChange={(e) => setName(e.target.value)}
+              value={name}
               type="text"
               className="mt-1 block w-full px-3 py-2 rounded-md border-2 border-gray-200 outline-none"
               placeholder="e.g. Stephen King"
@@ -53,6 +72,7 @@ export default function YourInfo() {
             </span>
             <input
               onChange={(e) => setEmail(e.target.value)}
+              value={email}
               type="email"
               className="mt-1 block w-full px-3 py-2 rounded-md border-2 border-gray-200 outline-none"
               placeholder="e.g. stephenking@lorem.com"
@@ -65,6 +85,7 @@ export default function YourInfo() {
             </span>
             <input
               onChange={(e) => setPhone(e.target.value)}
+              value={phone}
               type="phone"
               className="mt-1 block w-full px-3 py-2 rounded-md border-2 border-gray-200 outline-none"
               placeholder="e.g. +959 123 456 789"
