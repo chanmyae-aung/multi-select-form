@@ -33,14 +33,12 @@ export default function YourInfo() {
       const user = { name, email, phone };
       if(existedUserData?.data) {
         const { data } = await update(user);
-      data?.message === 'success' && nav("/plan")
-      console.log(data.message);
-      dispatch(updateUser({ user: data.user }));
+        dispatch(updateUser({ user: data.user }));
+        data?.message === 'success' && nav("/plan")
       } else {
         const { data } = await create(user);
-      data?.message === 'success' && nav("/plan")
-      console.log(data.message);
-      dispatch(createUser({ user: data.user }));
+        dispatch(createUser({ user: data.user }));
+        data?.message === 'success' && nav("/plan")
       }
     } catch (error) {
       console.log(error);

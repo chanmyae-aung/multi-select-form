@@ -6,7 +6,6 @@ import { useGetAddOnsQuery, useGetFinishQuery, useGetPlanQuery } from "../api/pl
 
 export default function ConfirmCard() {
 
-  const {data} = useGetFinishQuery()
   const {data:getPlan} = useGetPlanQuery()
   console.log(getPlan)
   const {data: getAddOns} = useGetAddOnsQuery()
