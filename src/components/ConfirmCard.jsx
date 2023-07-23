@@ -2,22 +2,24 @@ import React, { useEffect, useState } from "react";
 import Title from "./Title";
 import { Link } from "react-router-dom";
 import FooterButton from "./FooterButton";
-import { useGetFinishQuery } from "../api/planApi";
+import { useGetAddOnsQuery, useGetFinishQuery, useGetPlanQuery } from "../api/planApi";
 
 export default function ConfirmCard() {
 
   const {data} = useGetFinishQuery()
-  console.log(data)
-  const planTitle = data?.data.plan.title;
-  const planPrice = data?.data.plan.price;
-  const planType = data?.data?.plan.type;
+  const {data:getPlan} = useGetPlanQuery()
+  console.log(getPlan)
+  const {data: getAddOns} = useGetAddOnsQuery()
+  console.log(getAddOns)
+  // console.log(data)
+  const planTitle = getPlan?.data.title;
+  const planPrice = getPlan?.data.price;
+  const planType = getPlan?.data.type;
   
-  console.log(data?.data.plan.price)
-  const addOns = data?.data.add_on
+  console.log(getAddOns?.data)
+  const addOns = getAddOns?.data
 
 const addOnPrices = []
-
-
   const addOnCard = [
     {
       id: 1,

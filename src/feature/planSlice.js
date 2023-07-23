@@ -15,11 +15,14 @@ const planSlice = createSlice({
         addAddOns: (state, {payload}) => {
             state.addOns = payload.addOns
         },
-        // getFinish: (state) => {
-        //     state.getFinish
-        // }
+        updatePlan: (state, {payload}) => {
+            state.plan = payload.plan
+        },
+        updateAddOns: (state, {payload}) => {
+            state.addOns = payload.addOns
+        }
     }
 })
 
-export const {addPlan, addAddOns} = planSlice.actions
+export const {addPlan,updatePlan, addAddOns, updateAddOns} = planSlice.actions
 export default planSlice.reducer

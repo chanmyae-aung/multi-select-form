@@ -5,10 +5,11 @@ import FooterButton from "../components/FooterButton";
 import { useCreateUserMutation, useGetUserQuery, useUpdateUserMutation } from "../api/userApi";
 import { useDispatch } from "react-redux";
 import { createUser, updateUser } from "../feature/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useGetFinishQuery } from "../api/planApi";
 
 export default function YourInfo() {
+  const pathName = useLocation()
   const [create] = useCreateUserMutation();
   const [update] = useUpdateUserMutation();
   const {data:existedUserData} = useGetUserQuery()
@@ -19,25 +20,25 @@ export default function YourInfo() {
   const [name, setName] = useState(existedUserData?.data.name);
   const [email, setEmail] = useState(existedUserData?.data.email);
   const [phone, setPhone] = useState(existedUserData?.data.phone);
-  useEffect(() => {
-    setName(existedUserData?.data.name)
-    setEmail(existedUserData?.data.email)
-    setPhone(existedUserData?.data.phone)
-  },[])
-  console.log(name)
+  // useEffect(() => {
+  //   setName(existedUserData?.data.name)
+  //   setEmail(existedUserData?.data.email)
+  //   setPhone(existedUserData?.data.phone)
+  // },[pathName])
+  // console.log(name)
 
   const createHandler = async (e) => {
     try {
       e.preventDefault();
       const user = { name, email, phone };
-      if(existedUserData) {
+      if(existedUserData?.data) {
         const { data } = await update(user);
-      data.message === 'success' && nav("/plan")
+      data?.message === 'success' && nav("/plan")
       console.log(data.message);
       dispatch(updateUser({ user: data.user }));
       } else {
         const { data } = await create(user);
-      data.message === 'success' && nav("/plan")
+      data?.message === 'success' && nav("/plan")
       console.log(data.message);
       dispatch(createUser({ user: data.user }));
       }
@@ -52,7 +53,7 @@ export default function YourInfo() {
         <p className="text-gray-400">
           Please provide your name, email address and phone number
         </p>
-        <form onSubmit={createHandler} className="mt-10">
+        <form onSubmit={createHandler} className="mt-10 h-full relative ">
           <div>
             <span className="block text-sm font-medium text-slate-700">
               Name
@@ -93,7 +94,7 @@ export default function YourInfo() {
             />
           </div>
           <button
-            className="px-8 py-3 rounded bg-slate-800 text-white"
+            className="absolute bottom-0 right-0 px-8 py-3 rounded bg-slate-800 text-white"
           >
             Next
           </button>

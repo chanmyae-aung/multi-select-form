@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 export default function SelectPlan() {
   const [switchPlan, setSwitchPlan] = useState(false);
   const [state, setState] = useState(null);
-  console.log(state)
+
   const plan = [
     {
       id: 1,
@@ -64,7 +64,7 @@ export default function SelectPlan() {
       const planTitle = e.target.lastChild.childNodes[0].innerHTML;
       return planTitle === i.title;
     });
-    // console.log(value[0]);
+    console.log(value[0]);
 
     setState({
       title: value[0].title,
@@ -115,7 +115,7 @@ export default function SelectPlan() {
             className="flex flex-col lg:flex-row lg:mt-10 my-5 gap-5"
           >
             {plan.map((i) => {
-              // console.log(i);
+              console.log(i);
               const selectedCard =
                 i.id === existedPlanData?.data?.id &&
                 i.month_price === parseInt(existedPlanData?.data.price);
