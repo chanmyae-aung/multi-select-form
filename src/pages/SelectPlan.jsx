@@ -59,7 +59,7 @@ export default function SelectPlan() {
   const [update] = useUpdatePlanMutation();
 
   const card = document.querySelectorAll(".card");
-  
+
   const handleSelect = (e) => {
     const value = plan.filter((i) => {
       const planTitle = e.target.lastChild.childNodes[0].innerHTML;
@@ -94,12 +94,12 @@ export default function SelectPlan() {
       const { data: updateData } = await update(state);
       console.log(updateData)
       dispatch(updatePlan({ plan: updateData }));
-      // updateData?.message === "success" && nav("/add-ons");
+      updateData?.message === "success" && nav("/add-ons");
     } else {
       const { data } = await choosePlan(state);
       console.log(data);
       dispatch(addPlan({ plan: data }));
-      // data?.message === "success" && nav("/add-ons");
+      data?.message === "success" && nav("/add-ons");
     }
   };
 
